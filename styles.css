@@ -1,0 +1,121 @@
+:root {
+	--bg-clr: #0D1117;
+	--color: #c9d1d9;
+	--fs: 3rem;
+	--accent: #21262D;
+	--lighter: #242A31;
+	--used-letter-bg: #1F6FEB;
+	--dimmed: #010409;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background-color: var(--bg-clr);
+	color: var(--color);
+
+	position: relative;
+
+	/* Prevents user from selecting text and for it to be highlighted */
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+
+	font-family: "Open Sans", "Montserrat", "Arial", sans-serif;
+	font-size: var(--fs);
+}
+
+.current-gram {
+	text-align: center;
+	font-weight: bold;
+
+	width: calc(var(--fs) * 2.5);
+	height: var(--fs);
+
+	position: fixed;
+	left: 50%;
+	top: 20%;
+	transform: translate(-50%, -50%);
+	margin: 0 auto;
+}
+
+.text-input {
+	position: fixed;
+	left: 50%;
+	bottom: 50%;
+	transform: translate(-50%, -50%);
+	margin: 0 auto;
+}
+
+.win-lose-text {
+	position: fixed;
+	left: 50%;
+	bottom: 5rem;
+	transform: translate(-50%, -50%);
+	margin: 0 auto;
+}
+
+.alphabet-container {
+/*	display: flex;
+	gap: 1rem;
+	flex-direction: column;*/
+
+	display: grid;
+	gap: 3rem;
+	grid-template-columns: repeat(7, 3rem); 
+	grid-template-rows: repeat(3, 3rem);
+
+	position: fixed;
+	left: 50%;
+	bottom: 1rem;
+	transform: translate(-50%, -50%);
+	margin: 0 auto;
+}
+
+.letter-wrapper {
+	--letter-size: 3rem;
+
+	display: flex;
+
+	justify-content: center;
+	align-items: center;
+
+	text-align: center;
+	text-transform: uppercase;
+
+	padding: 1rem;
+	border-radius: .3rem;
+	background-color: var(--used-letter-bg);
+	width: var(--letter-size);
+	height: var(--letter-size);
+}
+
+.used-letter {
+	background-color: var(--accent);
+}
+
+.score {
+	z-index: -2;
+
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	margin: 0 auto;
+
+	font-size: 40rem;
+
+	/*color: var(--dimmed);*/
+
+	opacity: 5%;
+}
+
+.underlay {
+	z-index: -1;
+
+	pointer-events: none;
+
+	height: 100vh;
+}

@@ -1,0 +1,11 @@
+- letters remaining to use highlight in blue on the screen
+
+- each letter has a value like in the Scrabble, so when submitting a validated word, it adds the calculated score of each letter in the word
+
+- when completing all letters, the player gets N instant more score
+
+- the player cannot submit the same word twice
+
+- added a visual underlay element for special effects and animations
+
+- the inputted word cannot go above 45 letters, which is the highest length that the longest English word has
