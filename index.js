@@ -78,11 +78,42 @@ function getWordScore(currWord) {
 
 let currentWord = "";
 
+// will get filled in with each unique letters used
+let usedLetters = []
+
+let usedWords = []
+
 function wonWord(currWord = currentWord.toUpperCase(), currGram = currentGram.toUpperCase()) {
 	const isWordInGram = currWord.includes(currGram)
 	const isWordValid = words.includes(currWord.toLowerCase())
 	const isWordNotAlreadyUsed = !usedWords.includes(currWord)
 	return isWordInGram && isWordValid && isWordNotAlreadyUsed
+}
+
+function handleUsedLetters(_currWord) {
+	let wordAsArray = [..._currWord]
+
+	// console.log("Used Letters before submitting: " + usedLetters)
+	
+	wordAsArray.forEach(wordLetter => {
+		let isWordLetterNotInUsedLetters = !usedLetters.includes(wordLetter.toUpperCase());
+		let isWordLetterInAlphabetLetters = alphabetLetters.includes(wordLetter.toLowerCase());
+
+		if(isWordLetterNotInUsedLetters && isWordLetterInAlphabetLetters) {
+			usedLetters.push(wordLetter.toUpperCase())
+		}
+	})
+	
+	// console.log("Used Letters after submitting: " + usedLetters)
+
+	// Is true when the player used as many letters as there are
+	if (usedLetters.length === alphabetLetters.length) {
+		// console.log(usedLetters)
+		console.log("You have used all letters, congrats!")
+		// Gives N score when used all the letters
+		rewardPlayerForUsingAllLetters()
+		clearUsedLettersHighlight()
+	}
 }
 
 function handleSubmission(currWord) {
@@ -105,6 +136,12 @@ function handleSubmission(currWord) {
 		scoreEl.innerText = wordScore
 
 		usedWords.push(currWord.toUpperCase())
+
+		handleUsedLetters(currWord)
+
+		// // pushes the current unique letter to the used letter array
+		// if (!usedLetters.includes(ukey)) {
+		// usedLetters.push(ukey)
 	}
 }
 
@@ -119,10 +156,7 @@ function isCtrlA () {
 
 let currentCtrlA = false
 
-// will get filled in with each unique letters used
-let usedLetters = []
 
-let usedWords = []
 
 // Prevents the default behavior of the spacebar scrolling down the page
 el('keydown', (e) => {
@@ -188,27 +222,37 @@ el('keydown', (e) => {
 
 	currentWord += ukey
 
+	//generateColoredLettersInInput()
+
 	inputEl.innerText = currentWord.toUpperCase()
-
-	// pushes the current unique letter to the used letter array
-	if (!usedLetters.includes(ukey)) {
-		usedLetters.push(ukey)
-
-		// Is true when the player used as many letters as there are
-		if (usedLetters.length === alphabetLetters.length) {
-			console.log("You have used all letters, congrats!")
-			// Gives N score when used all the letters
-			rewardPlayerForUsingAllLetters()
-		}
-	}
 })
+
+// Need to generate separate/individual HTML elements for each word letter, and add colored classes to the gram letters
+function generateColoredLettersInInput(currWord, currGram) {
+	let isGramInWord = currWord.includes(currGram)
+
+	// sm
+	// mesmerizing
+
+
+}
+
+function displayUpScore() {
+	const plusScoreEl = qs('.plus-score')
+	
+}
 
 function rewardPlayerForUsingAllLetters() {
 	globalScore += config.scoreToAddWhenAllLetters
 }
 
+function clearUsedLettersHighlight() {
+	const lettersEl = qsa('.letter-wrapper')
 
-
+	lettersEl.forEach(letterEl => {
+			letterEl.classList.remove('used-letter')
+	})
+}
 
 
 // let test = words.includes(input)
@@ -218,6 +262,11 @@ function rewardPlayerForUsingAllLetters() {
 // console.log(`The word "${input}" ${formattedString} in the list of English words.`)
 
 
+const exeFadeBtn = qs('.exefade')
 
+function executeFade(e) {
+	const plusScoreEl = qs('.plus-score')
+	plusScoreEl.classList.toggle('fade-up')
+}
 
-
+el('click', executeFade, exeFadeBtn)

@@ -41,12 +41,65 @@ body {
 	margin: 0 auto;
 }
 
+.text-and-plus-score-container {
+
+}
+
 .text-input {
 	position: fixed;
 	left: 50%;
 	bottom: 50%;
 	transform: translate(-50%, -50%);
 	margin: 0 auto;
+
+	min-height: 4rem;
+	min-width: 7rem;
+
+	/*border-bottom: 1px solid rgba(0, 0, 0, .5);*/
+
+	text-align: center;
+}
+
+.plus-score {
+	position: fixed;
+	left: 50%;
+	bottom: 60%;
+	transform: translate(-50%, -50%);
+	margin: 0 auto;
+
+/*	min-height: 4rem;
+	min-width: 7rem;*/
+
+	/*border-bottom: 1px solid rgba(0, 0, 0, .5);*/
+
+	text-align: center;
+
+	font-size: 1.5rem;
+	font-weight: 400;
+	letter-spacing: .05rem;
+
+	/*opacity: 50%;*/
+
+	/*text-shadow: 0 0 3rem white;*/
+
+}
+
+.fade-up {
+	animation: .5s ease fade-up-plus-score
+}
+
+@keyframes fade-up-plus-score {
+	from {
+		text-shadow: 0 0 0rem white;
+		transform: translate(-50%, -50%);
+		font-size: 1.5rem;
+	}
+
+	to {
+		text-shadow: 0 0 3rem white;
+		transform: translate(-50%, -120%);
+		font-size: 1.8rem;
+	}
 }
 
 .win-lose-text {
@@ -90,10 +143,45 @@ body {
 	background-color: var(--used-letter-bg);
 	width: var(--letter-size);
 	height: var(--letter-size);
+
+
+}
+
+/* Letters that are highlighted, missing to complete all letters */
+.letter-wrapper:not(.used-letter) {
+	box-shadow: 0 0 .7rem var(--used-letter-bg);
+	animation: 2s ease bounce infinite;
+}
+
+@keyframes bounce {
+	0% {
+		transform: scale(100%);
+	}
+
+	50% {
+		transform: scale(95%);
+	}
+
+	100% {
+		transform: scale(100%);
+	}
 }
 
 .used-letter {
 	background-color: var(--accent);
+	animation: .5s ease shrink;
+	animation-fill-mode: forwards;
+}
+
+@keyframes shrink {
+	from {
+		transform: scale(100%);
+	}
+
+	to {
+		transform: scale(95%);
+	}
+	
 }
 
 .score {
@@ -119,3 +207,4 @@ body {
 
 	height: 100vh;
 }
+

@@ -1,1 +1,7 @@
-ideas.txt
+- color the grams letters in the input
+
+- add animations in the underlay with custom colors depending on the situation
+
+- add high scores in local storage (cookies)
+
+- add a little fading-moving-up "+N" score after submitting a valid word, with the score of the word
