@@ -52,6 +52,7 @@ function colorizeUsedLetter(currWord) {
 }
 
 let globalScore = 0
+let lastWordScore = 0
 
 function getWordScore(currWord) {
 	let currWordArray = currWord.split("")
@@ -71,6 +72,7 @@ function getWordScore(currWord) {
 		}
 	})
 	// console.log(`Current word's score was: ${score}`)
+	lastWordScore = score
 	globalScore += score
 	return globalScore
 }
@@ -88,6 +90,11 @@ function wonWord(currWord = currentWord.toUpperCase(), currGram = currentGram.to
 	const isWordValid = words.includes(currWord.toLowerCase())
 	const isWordNotAlreadyUsed = !usedWords.includes(currWord)
 	return isWordInGram && isWordValid && isWordNotAlreadyUsed
+}
+
+function handleWordsCount() {
+	const wordsCountEl = qs('.words-count')
+	wordsCountEl.innerText = usedWords.length
 }
 
 function handleUsedLetters(_currWord) {
@@ -114,10 +121,11 @@ function handleUsedLetters(_currWord) {
 		rewardPlayerForUsingAllLetters()
 		clearUsedLettersHighlight()
 	}
+		// lastWordScore = 0
 }
 
 function handleSubmission(currWord) {
-	let isWon = wonWord()
+	// let isWon = wonWord()
 	// winLoseEl.innerText = wonWord() ? "Valid" : "Invalid"
 
 	// Resets the current gram if player just completed the current one
@@ -138,6 +146,12 @@ function handleSubmission(currWord) {
 		usedWords.push(currWord.toUpperCase())
 
 		handleUsedLetters(currWord)
+
+		displayUpScore(lastWordScore)
+
+		lastWordScore = 0
+
+		handleWordsCount()	
 
 		// // pushes the current unique letter to the used letter array
 		// if (!usedLetters.includes(ukey)) {
@@ -160,7 +174,7 @@ let currentCtrlA = false
 
 // Prevents the default behavior of the spacebar scrolling down the page
 el('keydown', (e) => {
-	if (e.key === ' ' && e.target === document.body) {
+	if ((e.key === ' ' || e.key === 'Tab') && e.target === document.body) {
 		e.preventDefault();
 	}
 }, window)
@@ -237,12 +251,23 @@ function generateColoredLettersInInput(currWord, currGram) {
 
 }
 
-function displayUpScore() {
+function displayUpScore(currWordScore) {
 	const plusScoreEl = qs('.plus-score')
-	
+	plusScoreEl.innerText = "+" + currWordScore
+
+	plusScoreEl.classList.add('fade-up')
+
+	sleep(500).then(() => {
+		plusScoreEl.classList.remove('fade-up')
+		plusScoreEl.innerText = ""
+	})
+
+	lastWordScore = 0
+
 }
 
 function rewardPlayerForUsingAllLetters() {
+	lastWordScore += config.scoreToAddWhenAllLetters
 	globalScore += config.scoreToAddWhenAllLetters
 }
 
@@ -252,21 +277,19 @@ function clearUsedLettersHighlight() {
 	lettersEl.forEach(letterEl => {
 			letterEl.classList.remove('used-letter')
 	})
+
+	// Emptying the usedLetters array by setting its length to 0.
+	usedLetters.length = 0
 }
 
-
-// let test = words.includes(input)
-
-// let formattedString = test ? "is" : "is not"
-
-// console.log(`The word "${input}" ${formattedString} in the list of English words.`)
+handleWordsCount()
 
 
-const exeFadeBtn = qs('.exefade')
+// const exeFadeBtn = qs('.exefade')
 
-function executeFade(e) {
-	const plusScoreEl = qs('.plus-score')
-	plusScoreEl.classList.toggle('fade-up')
-}
+// function executeFade(e) {
+// 	const plusScoreEl = qs('.plus-score')
+// 	plusScoreEl.classList.toggle('fade-up')
+// }
 
-el('click', executeFade, exeFadeBtn)
+// el('click', executeFade, exeFadeBtn)

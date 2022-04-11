@@ -5,3 +5,14 @@
 - add high scores in local storage (cookies)
 
 - add a little fading-moving-up "+N" score after submitting a valid word, with the score of the word
+
+- 1 game can be composed of X rounds. The player must score the most amount of points and try to beat its own. This is where local HIGH SCORES are useful
+
+- add a visual validated words counter (at the top)
+
+- introducing Game Modes:
+	- Hardcore: 1 mistake/invalid word or duplicate ends the game
+	- Challenge: X mistakes/invalid words or duplicates makes you lose 1 life (out of N lives)
+	- Zen/Infinite/Chill: current game mode with infinite scoring just for fun
+	- Timed: Score the most amount of points in N time
+	- Themed: Uses a dictionary of words from a specific theme (games, movies, programming, etc.)
