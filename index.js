@@ -268,7 +268,7 @@ function displayUpScore(currWordScore) {
 
 function rewardPlayerForUsingAllLetters() {
 	lastWordScore += config.scoreToAddWhenAllLetters
-	globalScore += config.scoreToAddWhenAllLetters
+	// globalScore += config.scoreToAddWhenAllLetters
 }
 
 function clearUsedLettersHighlight() {

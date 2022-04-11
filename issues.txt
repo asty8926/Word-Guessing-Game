@@ -1,6 +1,6 @@
-(Not happening all the times? Seems to be fixed)
+FIXED (Not happening all the times? Seems to be fixed)
 - fix used letters elements' animations unsynching after all completed (ensure a loop with class assignment "used-letter" at the same time?)
 
-FIXED - +100 score after all used letters completed forever
+FIXED - +100 score after all used letters completed forever (although not displaying +1XX, it's still giving 100 more score for the 1 extra validated word after all letters have been completed once)
 
 - Ctrl + A detection not working (does nothing, and the letter A is still registered and displayed as if we're typing it)
